@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="lib/leaflet-0.7.5/leaflet.css">
+	<link rel="stylesheet" href="lib/bootstrap-3.3.5-dist/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="lib/bootstrap-3.3.5-dist/css/bootstrap.css">
+	<meta charset="utf-8">
+	<title>Sea</title>
+</head>
+<body>
+	<div class='container'>
+		<div class='row'>
+			<div class='col-xs-4 col-md-2'>
+				<br/>
+				<img class="" src="img/logo-misiontiburon-web.png" alt="Chania">
+			</div>
+			<div  class='col-xs-10 '>
+				<h1>Detector de AMMS</h1>
+			</div>
+		</div>
+		<div class='row well'>
+			<div  id="status" class='col-xs-12 '>
+				<i id="icon-status" style="color:green;font-size: 150%;" class="glyphicon glyphicon-ok"></i>
+				<p class="lead" style="display:inline;color:green;font-size: 150%;" id="p1"> Dentro del AMMS </p>
+			</div>
+			<div id="buttons" class='col-xs-10 col-md-3'>
+				<button class="btn btn-lg btn-primary" type="button" onClick="detectLocation();">Detectar mi ubicación</button>	
+				
+			</div>
+			<div  class='col-xs-4 col-md-6	'>
+				<button class="btn btn-lg btn-default " type="button" onClick="deleteValues();">Borrar valores</button>	
+			
+			</div>
+			
+		</div>
+		<div class='row well well-lg '>
+			<div id="Decimals"class=' col-md-2'>
+				<h3 style="display:inline;"> Grados </h3>
+				<p >Latitud</p>
+				<input style="width:70px;" type="number" id="p_lat"  onChange="changeValueDec('lat');">
+				<p >Longitud</p>
+				<input style="width:70px;" type="number" id="p_lng"  onChange="changeValueDec('lng');">
+			</div>
+			<div id="Degrees" class=' col-md-5'>
+				<h3 style="display:inline;"> Grados, Minutos y Segundos </h3>
+				<p >Latitud</p>
+				<input style="width:70px;" type="number" id="lat_deg"    onChange="changeValueDeg('lat');" >
+				<p style="display:inline;">º</p>
+				<input style="width:70px;" type="number" id="lat_min"   onChange="changeValueDeg('lat');">
+				<p style="display:inline;">'</p>
+				<input style="width:70px;" type="number" id="lat_sec"  onChange="changeValueDeg('lat');">
+				<p style="display:inline;">"</p>
+				<p >Longitud</p>
+				<input style="width:70px;" type="number" id="lng_deg"  onChange="changeValueDeg('lng');">
+				<p style="display:inline;">º</p>
+				<input style="width:70px;" type="number" id="lng_min" onChange="changeValueDeg('lng');">
+				<p style="display:inline;">'</p>
+				<input style="width:70px;" type="number" id="lng_sec"   onChange="changeValueDeg('lng');">
+				<p style="display:inline;">"</p>
+			</div>
+			<div id="Map" class=' col-md-5'>
+				<class="visible-xs visible-sm" br/>
+				<div class='col-xs-11' id="map" style="width: 200px; height: 200px; border: 1px solid #AAA;"></div>	
+			</div>
+		</div>
+		<div class='row well well-lg '>
+			<p>Hecho por Daniel Rojas : drojasug@gmail.com en colaboración con Andres Lopez de Misión Tiburón</p>
+		</div>
+	</div>
+	<script src="lib/leaflet-0.7.5/leaflet.js"></script>
+	<script src="lib/leaflet-pip/leaflet-pip.min.js"></script>
+	<script src="lib/jquery-1.11.3/jquery-1.11.3.min.js"></script>
+	<script src="lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+</body>
+</body>
+</html>
