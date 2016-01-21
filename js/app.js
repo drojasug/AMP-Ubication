@@ -60,45 +60,44 @@ var ostional = [[10.016680383844886,-85.72924667173585],[10.013672142568286,-85.
 var caletas = [[9.849764292546974,-85.46806910895305],[9.849767803761953,-85.46352408367488],[9.849823257379743,-85.46065932695494],[9.859144094123552,-85.46077028387735],[9.859272298044257,-85.45184758909255],[9.862001531329915,-85.45147868438225],[9.86205711663151,-85.44521810247785],[9.859053782421945,-85.44508925589976],[9.85900284652498,-85.42996159147654],[9.853217721798549,-85.42961691681673],[9.853230699918875,-85.42654932071162],[9.850364693239431,-85.42617525809464],[9.85015255301833,-85.41141949182058],[9.84735604866138,-85.41100245039362],[9.847267307025094,-85.40475106964439],[9.64854627619527,-85.40181249607473],[9.648571663884425,-85.46749047788362],  [ 9.849764292546974, -85.46806910895305 ] ];
 var caletas2 = [[9.762094786369472,-85.27281855972603],[9.760665126704593,-85.27136643871223],[9.758884774644738,-85.26774297288146],[9.746050450870479,-85.24563326173227],[9.732117381257677,-85.2293074999381],[9.72175567818448,-85.21733559979856],[9.707051077784994,-85.21583596686739],[9.560883274536861,-85.35194400576741],[9.6151714824313,-85.41289132827517],  [ 9.762094786369472, -85.27281855972603 ] ];
 var islaSanLucas = [[9.949124628456426,-84.92370608479311],[9.949581840185736,-84.91400792900102],[9.955752883961251,-84.91416986346783],[9.955474140882478,-84.91112890516062],[9.958631623368976,-84.91113766343629],[9.958778301201603,-84.9099798932493],[9.958946536134327,-84.90085969767834],[9.956220001897469,-84.90070744830797],[9.956101318648983,-84.89144174657368],[9.952656387003826,-84.89157717028762],[9.952091157647915,-84.88824592758859],[9.940896369244232,-84.88821568874081],[9.939899760407473,-84.8851729394079],[9.933152642615303,-84.88573384310249],[9.932994914822077,-84.89108959863977],[9.927686873509307,-84.89020668340909],[9.92710469403484,-84.89324504741717],[9.924521281678135,-84.89323804474331],[9.924224187619842,-84.89700093484042],[9.920348297883015,-84.89727989986878],[9.92060690677083,-84.90784776553411],[9.923763222574273,-84.9082907283212],[9.92459992173303,-84.9172679687131],[9.92947927144863,-84.91742631143283],[9.929462571396265,-84.92350613672482],[9.932907889090655,-84.92322627705407],[9.932889069417985,-84.93002995000043],[9.940208657801604,-84.9300506310177],[9.940791175716454,-84.92701224355491],[9.943086315146429,-84.92745300456096],[9.943238647514347,-84.92426861054035],  [ 9.949124628456426, -84.92370608479311 ] ];
-
-var areas = [];
-areas.push(gandoca);
-areas.push(rioOro);
-areas.push(caboBlanco);
-areas.push(tortuguero);
-areas.push(cahuita);
-areas.push(corcovado);
-areas.push(marinoBallena);
-areas.push(manuelAntonio);
-areas.push(playaHermosaPuntaMala);
-areas.push(marinoLasBaulas);
-areas.push(piedrasBlancas);
-areas.push(santaRosa);
-areas.push(ostional);
-areas.push(caletas);
-areas.push(caletas2);
-areas.push(islaSanLucas);
-
-
+var islaDelCoco = [[6.133,-87],[5.733,-86.433],[4.8,-87.283],[4.966,-88]];
 /*
 Here we define our area. Later this is going to be a group of areas.
 We also define our polygon. This receives our area.
 */
-var pts = [[6.133,-87],[5.733,-86.433],[4.8,-87.283],[4.966,-88]];
-var polygon =  L.polygon(pts, {
-  color: '#FF0000',
-  opacity: 0.1,
-  fillOpacity: 0.1
-});
+
+
+var areas = [];
+areas.push({name:"Gandoca",points:gandoca});
+areas.push({name:"Rio Oro",points:rioOro});
+areas.push({name:"Cablo Blanco",points:caboBlanco});
+areas.push({name:"Tortuguero",points:tortuguero});
+areas.push({name:"Cahuita",points:cahuita});
+areas.push({name:"Corcovado",points:corcovado});
+areas.push({name:"Marino Ballena",points:marinoBallena});
+areas.push({name:"Manuel Antonio",points:manuelAntonio});
+areas.push({name:"Playa Hermosa Punta Mala",points:playaHermosaPuntaMala});
+areas.push({name:"Marino Las Baulas",points:marinoLasBaulas});
+areas.push({name:"Piedras Blancas",points:piedrasBlancas});
+areas.push({name:"Santa Rosa",points:santaRosa});
+areas.push({name:"Ostional",points:ostional});
+areas.push({name:"Caletas",points:caletas});
+areas.push({name:"Caletas 2",points:caletas2});
+areas.push({name:"Isla San Lucas",points:islaSanLucas});
+areas.push({name:"Isla Del Coco",points:islaDelCoco});
+
+
+
+
 
 
 /*
 Here we add our polygons to a layerGroup.
 */
-var layer1 = L.layerGroup([polygon]);
+var layer1 = L.layerGroup();
 
 for (i in areas){
-  var polygon2 =  L.polygon(areas[i], {
+  var polygon2 =  L.polygon(areas[i].points, {
     color: '#FF0000',
     opacity: 0.1,
     fillOpacity: 0.1
@@ -122,6 +121,7 @@ document.getElementById("p_lng").value = center[1];
 ConvertDDToDMS(document.getElementById("p_lat").value,"lat");
 ConvertDDToDMS(document.getElementById("p_lng").value,"lng");
 
+
 /*
 We listen to an event where marker is dragged.
 We also invoke the checkGeoFence method.
@@ -131,10 +131,6 @@ marker.on('dragend', function (ev) {
   var coords = ev.target._latlng;
   checkGeoFence(coords.lat.toFixed(3), coords.lng.toFixed(3));
 });
-
-
-
-
 
 
 /*
@@ -214,10 +210,44 @@ function ConvertDMSToDD(degress,minutes,seconds,option)
 This method checks if the point is inside a Geofence.
 */
 
-var checkGeoFence = function (lat, lng) {  
-  var gjLayer = L.geoJson(polygon.toGeoJSON());
-  var res = leafletPip.pointInLayer([lng, lat], gjLayer);
-  if (res.length === 0 || res === false) {
+var checkGeoFence = function (lat, lng) {
+  /*
+  We initialize a geoJson that is going to be used in the leafletPip
+  */
+  var gjLayer;
+  var res;
+  var isInside = false;
+  var name="";
+
+  for (i in areas){
+    var currentPolygon =  L.polygon(areas[i].points, {
+      color: '#FF0000',
+      opacity: 0.1,
+      fillOpacity: 0.1
+    });
+    gjLayer = L.geoJson(currentPolygon.toGeoJSON());
+    res = leafletPip.pointInLayer([lng, lat], gjLayer);
+    if (!(res.length === 0 || res === false)) {
+      /*
+      This code is executed when the marker is inside
+      */
+      name = areas[i].name;
+      isInside = true;
+      break;
+    }
+  }
+
+
+
+  if (isInside) {
+    /*
+    This code is executed when the marker is inside
+    */
+    document.getElementById("p1").innerHTML = "Dentro del AMMS " + name;
+    document.getElementById("p1").style.color = "green";
+    document.getElementById("icon-status").style.color = "green";
+    document.getElementById("icon-status").className = "glyphicon glyphicon-ok";
+  }else{
     /*
     This code is executed when the marker is outside
     */
@@ -225,14 +255,6 @@ var checkGeoFence = function (lat, lng) {
     document.getElementById("p1").style.color = "red";
     document.getElementById("icon-status").className = "glyphicon glyphicon-remove";
     document.getElementById("icon-status").style.color = "red";
-  }else{
-    /*
-    This code is executed when the marker is inside
-    */
-    document.getElementById("p1").innerHTML = "Dentro del AMMS";
-    document.getElementById("p1").style.color = "green";
-    document.getElementById("icon-status").style.color = "green";
-    document.getElementById("icon-status").className = "glyphicon glyphicon-ok";
   }
   /*
   Here we update the fields in html
@@ -242,6 +264,12 @@ var checkGeoFence = function (lat, lng) {
   ConvertDDToDMS(document.getElementById("p_lat").value,"lat");
   ConvertDDToDMS(document.getElementById("p_lng").value,"lng");
 };
+/*
+This method invocation is here so when the user enters, the first name is loaded.
+If not the HMTML would only show "Dentro del AMMS" 
+*/
+checkGeoFence(document.getElementById("p_lat").value, document.getElementById("p_lng").value);
+
 
 /*
 This method is activated when a decimal field is changed in the html.
