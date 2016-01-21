@@ -218,24 +218,28 @@ var checkGeoFence = function (lat, lng) {
   var res;
   var gjLayer = L.geoJson(polygon.toGeoJSON());
   res = leafletPip.pointInLayer([lng, lat], gjLayer);
-  var status = 'inside';
-  document.getElementById("p1").innerHTML = "Dentro del AMMS";
-  document.getElementById("p1").style.color = "green";
-  document.getElementById("icon-status").style.color = "green";
-  document.getElementById("icon-status").className = "glyphicon glyphicon-ok";
+  var status;
   if (res.length === 0 || res === false) {
-    status = 'outside';
+    /*
+    This code is executed when the marker is outside
+    */
     document.getElementById("p1").innerHTML = "Afuera del AMMS";
     document.getElementById("p1").style.color = "red";
     document.getElementById("icon-status").className = "glyphicon glyphicon-remove";
     document.getElementById("icon-status").style.color = "red";
-
+  }else{
+    /*
+    This code is executed when the marker is inside
+    */
+    document.getElementById("p1").innerHTML = "Dentro del AMMS";
+    document.getElementById("p1").style.color = "green";
+    document.getElementById("icon-status").style.color = "green";
+    document.getElementById("icon-status").className = "glyphicon glyphicon-ok";
   }
   document.getElementById("p_lat").value = lat;
   document.getElementById("p_lng").value = lng;
   ConvertDDToDMS(document.getElementById("p_lat").value,"lat");
   ConvertDDToDMS(document.getElementById("p_lng").value,"lng");
-  return status;
 };
 
 /*
