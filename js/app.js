@@ -106,8 +106,7 @@ var polygon =  L.polygon(pts, {
 
 
 /*
-Here we add our polygon to a layerGroup.
-TODO: use addLayer to use more polygons.
+Here we add our polygons to a layerGroup.
 */
 var layer1 = L.layerGroup([polygon]);
 
@@ -120,7 +119,7 @@ for (i in areas){
   layer1 = layer1.addLayer(polygon2);
 }
 
-
+// TODO: Check if all the areas are correct some seem weird
 
 /*
 Here we add the marker previously defined and latter add our layer to the map.
