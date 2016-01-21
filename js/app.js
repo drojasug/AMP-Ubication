@@ -214,11 +214,9 @@ function ConvertDMSToDD(degress,minutes,seconds,option)
 This method checks if the point is inside a Geofence.
 */
 
-var checkGeoFence = function (lat, lng) {
-  var res;
+var checkGeoFence = function (lat, lng) {  
   var gjLayer = L.geoJson(polygon.toGeoJSON());
-  res = leafletPip.pointInLayer([lng, lat], gjLayer);
-  var status;
+  var res = leafletPip.pointInLayer([lng, lat], gjLayer);
   if (res.length === 0 || res === false) {
     /*
     This code is executed when the marker is outside
@@ -236,6 +234,9 @@ var checkGeoFence = function (lat, lng) {
     document.getElementById("icon-status").style.color = "green";
     document.getElementById("icon-status").className = "glyphicon glyphicon-ok";
   }
+  /*
+  Here we update the fields in html
+  */
   document.getElementById("p_lat").value = lat;
   document.getElementById("p_lng").value = lng;
   ConvertDDToDMS(document.getElementById("p_lat").value,"lat");
